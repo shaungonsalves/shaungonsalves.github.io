@@ -96,10 +96,12 @@
         <p></p>
         <p class="lead mb-5">Looking for internships and co-op opportunities starting January 2021 in the USA. Currently pursuing Master of Science in Computer Science (MS CS), with 2½ years of experience as a software developer & consultant at Tata Consultancy Services, Mumbai, India.</p>
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/shaungonsalves/" target="_blank">
+          <a href="https://www.linkedin.com/in/shaungonsalves/" target="_blank"
+             onclick="ga('send','event',['about'],['open_linkedin'])">
             <i class="fab fa-linkedin-in"></i>
           </a>
-          <a href="https://github.com/shaungonsalves" target="_blank">
+          <a href="https://github.com/shaungonsalves" target="_blank"
+             onclick="ga('send','event',['about'],['open_github'])">
             <i class="fab fa-github"></i>
           </a>
 	<!--
@@ -110,7 +112,8 @@
           <!-- <a href="https://www.facebook.com/shaun.gonsalves288" target="_blank">
             <i class="fab fa-facebook-f"></i>
           </a> -->
-		      <a href="assets/resume.pdf" target="_blank">
+		      <a href="assets/resume.pdf" target="_blank"
+                 onclick="gtag('event', 'click', { 'event_category' : 'button_click', 'event_label' : 'resume_download'});">
             <i class="fas fa-file-download"></i>
           </a>
         </div>
@@ -197,7 +200,9 @@
     <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="projects">
       <div class="w-100">
         <h2 class="mb-5">Academic Projects</h2>
-		  
+        
+       
+
 		  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div class="resume-content">
               <h3 class="mb-0">Big Data Analysis of taxi data in NYC and Chicago</h3>
@@ -212,13 +217,14 @@
               <span class="text-primary">July 2020</span>
             </div>  
           </div>
-		  
+
 		  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div class="resume-content">
               <h3 class="mb-0">Text mining and finding the most important words using Zipf’s Law</h3>
               <p>
 				<ul>
-					<li>Discovered the characters and words central to the story line in the books “Pride & Prejudice”, and “Jane Eyre”.</li>
+          <li>Discovered the characters and words central to the story line in the books “Pride & Prejudice”, and “Jane Eyre”.</li>
+          <li>Utilized TF-IDF to determine relevance.</li>
 				</ul>
 			  </p>
             </div>
@@ -226,7 +232,22 @@
               <span class="text-primary">June 2020</span>
             </div>  
           </div>
-		  
+
+          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="resume-content">
+              <h3 class="mb-0">Apriori Itemset Mining</h3>
+              <p>
+              <ul>
+                <li>Implemented an optimized Apriori algorithm from scratch using Java and JDBC connector.</li>
+                <li>Implemented Early Stopping, Pruning, Ordered Processing to further optimize the existing algorithm.</li>
+              </ul>
+              </p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">March 2020</span>
+            </div>
+          </div>
+
 		  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div class="resume-content">
               <h3 class="mb-0">Year-round Orienteering</h3>
@@ -241,6 +262,38 @@
               <span class="text-primary">February 2020</span>
             </div>  
           </div>
+
+          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="resume-content">
+              <h3 class="mb-0">Web Portfolio</h3>
+              <p>
+              <ul>
+                <li>Built an Bootstrap based online portfolio to showcase my profile and achievements.</li>
+                <li>Integrated Google Analytics to analyze how recruiters view the page and what links are clicked.</li>
+              </ul>
+              </p>
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">January 2020</span>
+            </div>
+          </div>
+
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+          <div class="resume-content">
+            <h3 class="mb-0">Pi Counter</h3>
+            <p>
+            <ul>
+              <li>Developed an application from scratch that would count the number of occurrences of numbers 0 to 9
+              in the irrational number Pi.</li>
+              <li>Extended the above application to run remotely in a multi-threaded server environment using Java Sockets.</li>
+              <li>Modified the above use-case to run remotely via RMI (Remote Method Invocation).</li>
+            </ul>
+            </p>
+          </div>
+          <div class="resume-date text-md-right">
+            <span class="text-primary">January 2020</span>
+          </div>
+        </div>
 		  
 		  <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
             <div class="resume-content">
