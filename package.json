@@ -12,7 +12,9 @@
         "html",
         "responsive",
         "theme",
-        "template"
+        "template",
+        "shaun",
+        "resume"
     ],
     "homepage": "https://startbootstrap.com/template-overviews/resume",
     "bugs": {
@@ -29,22 +31,18 @@
         "url": "https://github.com/BlackrockDigital/startbootstrap-resume.git"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "5.15.3",
-        "bootstrap": "5.0.1",
-        "jquery": "3.6.0",
-        "jquery.easing": "^1.4.1"
+        "bootstrap": "5.2.3"
     },
     "devDependencies": {
-        "browser-sync": "2.26.14",
-        "del": "6.0.0",
-        "gulp": "4.0.2",
-        "gulp-autoprefixer": "8.0.0",
-        "gulp-clean-css": "4.3.0",
-        "gulp-header": "2.0.9",
-        "gulp-plumber": "^1.2.1",
-        "gulp-rename": "2.0.0",
-        "gulp-sass": "4.1.0",
-        "gulp-uglify": "3.0.2",
-        "merge-stream": "2.0.0"
+        "autoprefixer": "10.4.14",
+        "browser-sync": "2.29.1",
+        "chokidar": "3.5.3",
+        "concurrently": "6.3.0",
+        "postcss": "8.4.21",
+        "prettier": "2.8.6",
+        "pug": "3.0.2",
+        "sass": "1.60.0",
+        "shelljs": "0.8.5",
+        "upath": "2.0.1"
     }
 }
