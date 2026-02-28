@@ -3,14 +3,24 @@ import gsap from 'gsap';
 import { Download, Linkedin, Mail } from 'lucide-react';
 import { resumeData } from '../assets/resumeData';
 import { headerData } from '../assets/headerData';
+import resumePdf from '../assets/pdf/resume.pdf';
 
-function HeaderCard({ startTyping }) {   // ← accept prop
+function HeaderCard({ startTyping }) {
   const nameRef = useRef(null);
   const originalName = resumeData.name;
   const [isComplete, setIsComplete] = useState(false);
 
+  // create and click an anchor element so the browser downloads the file
+  const handleDownload = () => {
+    const a = document.createElement('a');
+    a.href = resumePdf;
+    a.setAttribute('download', '');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   useEffect(() => {
-    // Only run typing animation when startTyping becomes true
     if (!startTyping) return;
 
     gsap.to({}, {
@@ -26,7 +36,7 @@ function HeaderCard({ startTyping }) {   // ← accept prop
         setIsComplete(true);
       }
     });
-  }, [startTyping, originalName]);   // ← depends on startTyping
+  }, [startTyping, originalName]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -47,6 +57,7 @@ function HeaderCard({ startTyping }) {   // ← accept prop
             type="button"
             title="Download Resume"
             className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            onClick={handleDownload}
           >
             <Download/>
           </button>
