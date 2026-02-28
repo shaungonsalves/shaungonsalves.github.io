@@ -30,6 +30,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 h1 {
@@ -67,4 +73,15 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;          /* adjust width to match underscore */
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
