@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import { Download, Linkedin, Mail } from 'lucide-react';
 import { resumeData } from '../assets/resumeData';
+import { headerData } from '../assets/headerData';
 
 function HeaderCard({ startTyping }) {   // ← accept prop
   const nameRef = useRef(null);
@@ -39,13 +41,32 @@ function HeaderCard({ startTyping }) {   // ← accept prop
           <span className="cursor">_</span>
         </div>
 
-        <p className="text-lg md:text-xl text-gray-800 mb-8">{resumeData.headline}</p>
+        <p className="text-lg md:text-xl text-gray-800 mb-8">{headerData.headline}</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-            Download PDF
+          <button
+            type="button"
+            title="Download Resume"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+          >
+            <Download/>
           </button>
-          <button className="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-900 transition">
-            LinkedIn
+          <button
+            type="button"
+            aria-label="Open LinkedIn profile"
+            title="LinkedIn"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            onClick={() => window.open(resumeData.contact.linkedin, '_blank')}
+          >
+            <Linkedin/>
+          </button>
+          <button
+            type="button"
+            aria-label="Send email"
+            title="Email"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            onClick={() => window.location.href = `mailto:${resumeData.contact.email}`}
+          >
+            <Mail/>
           </button>
         </div>
       </div>

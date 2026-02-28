@@ -10,6 +10,7 @@ function ResumeCard({ opacity = 1 }) {
       style={{ opacity }}
     >
       <h2 className="text-gray-900 text-8xl font-bold mb-8 text-center">{resumeData.name}</h2>
+      <p className="text-gray-700 text-lg mb-12 text-center">{resumeData.headline}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left column */}
