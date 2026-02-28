@@ -17,7 +17,7 @@ export const resumeData = {
       institution: "Rochester Institute of Technology",
       location: "Rochester NY, United States",
       degree: "Master of Science (MS) in Computer Science",
-      details: "Advanced Graduate Certificate in Big Data Analytics",
+      details: "Data Structures and Algorithms, Distributed Systems, Cloud Computing, Database Management, Big Data Analytics",
       date: "Aug 2019 - May 2022"
     },
     {
@@ -41,22 +41,45 @@ export const resumeData = {
     {
       company: "Intuit Inc.",
       title: "Software Engineer 2",
+      dates: "Oct 2024 - Present",
       tech: "Java 21, Kotlin, Springboot, Typescript, React",
       bullets: [
-        "Co-developed a Textract-based widget in TurboTax to ingest, parse, transform, and persist external documents via an event-driven pipeline allowing users to prefill all tax content; improved prefill rate from 91% to 97% for top 5 forms.",
-        "Co-developed saved credentials pre import and payroll partner API integration to auto-retrieve tax forms and enable a done-for-you experience; adopted by 17% of eligible users and 9% of returning users.",
-        "Solely built a Terraform-style framework in < 1 week to automate Splunk alert provisioning using Flask, Pyandatic, and PyTest; enabled build/change/version workflows, faster rollouts, and an improved approval process for alert changes."
+        {
+          text: "Co-developed a Textract-based widget in TurboTax to ingest, parse, transform, and persist external documents via an event-driven pipeline allowing users to prefill all tax content; improved prefill rate from 91% to 97% for top 5 forms.",
+          emphasis: ["improved prefill rate from 91% to 97%"]
+        },
+        {
+          text: "Co-developed saved credentials pre import and payroll partner API integration to auto-retrieve tax forms and enable a done-for-you experience; adopted by 17% of eligible users and 9% of returning users.",
+          emphasis: ["adopted by 17%", "and 9% of returning users"]
+        },
+        {
+          text: "Solely built a Terraform-style framework in 1 week to automate Splunk alert provisioning using Flask, Pyandatic, and PyTest; enabled build/change/version workflows, faster rollouts, and an improved approval process for alert changes.",
+          emphasis: ["Terraform", "in 1 week", "Splunk"]
+        }
       ]
     },
     {
       company: "Amazon Inc.",
       title: "Software Dev Engineer",
+      dates: "May 2022 - Oct 2024",
       tech: "Java 21, Springboot, JUnit5, Typescript, AWS CDK",
       bullets: [
-        "Service owner for a tier-1 application, enabling 40% faster onboarding, cutting user interventions, impacting $14 million in revenue for Amazon.",
-        "Contributed to improving a deployment process using data pipelines, saving 4 SDE hours and 6 Analyst hours per deployment. Developed infrastructure using CDK to ensure connectivity with legacy systems.",
-        "Executed a feature from design to implementation to support promoting Amazon devices to 20 million users.",
-        "Implemented a proposal for making a tier-1 service resilient to outages that previously caused $200 million impact.",
+        {
+          text: "Service owner for a tier-1 application, enabling 40% faster onboarding, cutting user interventions, impacting $14 million in revenue for Amazon.",
+          emphasis: ["40% faster onboarding", "impacting $14 million in revenue"],
+        },
+        {
+          text: "Contributed to improving a deployment process using data pipelines, saving 4 SDE hours and 6 Analyst hours per deployment. Developed infrastructure using CDK to ensure connectivity with legacy systems.",
+          emphasis: ["saving 4 SDE hours and 6 Analyst hours per deployment"],
+        },
+        {
+          text: "Executed a feature from design to implementation to support promoting Amazon devices to 20 million users.",
+          emphasis: ["20 million users"]
+        },
+        {
+          text: "Implemented a proposal for making a tier-1 service resilient to outages that previously caused $200 million impact.",
+          emphasis: ["$200 million impact"]
+        },
         "Self-learner: Acclimatized myself with the service, tooling, and made design and code contributions within 30 days."
       ]
     },
