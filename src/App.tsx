@@ -1,5 +1,5 @@
 import './App.css';
-import { useRef, useEffect, useState } from 'react';   // ← add useState
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeaderCard from './components/HeaderCard';
@@ -7,10 +7,10 @@ import ResumeCard from './components/ResumeCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
-  const headerRef = useRef(null);
-  const resumeRef = useRef(null);
-  const [startHeaderTyping, setStartHeaderTyping] = useState(false); // ← new state
+function App(): JSX.Element {
+  const headerRef = useRef<HTMLDivElement>(null);
+  const resumeRef = useRef<HTMLDivElement>(null);
+  const [startHeaderTyping, setStartHeaderTyping] = useState<boolean>(false);
 
   useEffect(() => {
     // Header fade‑in on load
@@ -22,7 +22,7 @@ function App() {
         y: 0,
         duration: 1,
         ease: 'power2.out',
-        onComplete: () => setStartHeaderTyping(true), // ← start typing after fade‑in
+        onComplete: () => setStartHeaderTyping(true),
       }
     );
 
@@ -51,7 +51,7 @@ function App() {
   return (
     <>
       <div ref={headerRef}>
-        <HeaderCard startTyping={startHeaderTyping} />   {/* ← pass prop */}
+        <HeaderCard startTyping={startHeaderTyping} />
       </div>
       <div ref={resumeRef}>
         <ResumeCard />

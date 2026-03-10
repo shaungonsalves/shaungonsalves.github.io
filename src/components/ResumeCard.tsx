@@ -1,9 +1,13 @@
-// src/components/ResumeCard.jsx
+// src/components/ResumeCard.tsx
 import { resumeData } from '../assets/resumeData';
 import ResumeLeftPanel from './resume/ResumeLeftPanel';
 import ResumeRightPanel from './resume/ResumeRightPanel';
 
-function ResumeCard({ opacity = 1 }) {
+interface ResumeCardProps {
+  opacity?: number;
+}
+
+function ResumeCard({ opacity = 1 }: ResumeCardProps): JSX.Element {
   return (
     <div
       className="bg-white shadow-xl p-4 md:p-8 max-w-6xl mx-auto mb-10 transition-opacity duration-300"

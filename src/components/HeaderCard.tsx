@@ -5,13 +5,17 @@ import { resumeData } from '../assets/resumeData';
 import { headerData } from '../assets/headerData';
 import resumePdf from '../assets/pdf/resume.pdf';
 
-function HeaderCard({ startTyping }) {
-  const nameRef = useRef(null);
+interface HeaderCardProps {
+  startTyping: boolean;
+}
+
+function HeaderCard({ startTyping }: HeaderCardProps): JSX.Element {
+  const nameRef = useRef<HTMLSpanElement>(null);
   const originalName = resumeData.name;
-  const [isComplete, setIsComplete] = useState(false);
+  const [isComplete, setIsComplete] = useState<boolean>(false);
 
   // create and click an anchor element so the browser downloads the file
-  const handleDownload = () => {
+  const handleDownload = (): void => {
     const a = document.createElement('a');
     a.href = resumePdf;
     a.setAttribute('download', '');
