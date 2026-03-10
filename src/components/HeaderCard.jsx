@@ -52,11 +52,11 @@ function HeaderCard({ startTyping }) {
         </div>
 
         <p className="text-lg md:text-xl text-gray-800 mb-8">{headerData.headline}</p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-row gap-4 justify-center">
           <button
             type="button"
             title="Download Resume"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
             onClick={handleDownload}
           >
             <Download/>
@@ -65,7 +65,7 @@ function HeaderCard({ startTyping }) {
             type="button"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
             onClick={() => window.open(resumeData.contact.linkedin, '_blank')}
           >
             <Linkedin/>
@@ -74,7 +74,7 @@ function HeaderCard({ startTyping }) {
             type="button"
             aria-label="Send email"
             title="Email"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-800 transition flex items-center justify-center"
+            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
             onClick={() => window.location.href = `mailto:${resumeData.contact.email}`}
           >
             <Mail/>
