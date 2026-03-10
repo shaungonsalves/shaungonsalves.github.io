@@ -7,7 +7,7 @@ interface ResumeCardProps {
   opacity?: number;
 }
 
-function ResumeCard({ opacity = 1 }: ResumeCardProps): JSX.Element {
+function ResumeCard({ opacity = 1 }: ResumeCardProps) {
   return (
     <div
       className="bg-white shadow-xl p-4 md:p-8 max-w-6xl mx-auto mb-10 transition-opacity duration-300"

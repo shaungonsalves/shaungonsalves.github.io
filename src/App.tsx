@@ -7,7 +7,7 @@ import ResumeCard from './components/ResumeCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App(): JSX.Element {
+function App() {
   const headerRef = useRef<HTMLDivElement>(null);
   const resumeRef = useRef<HTMLDivElement>(null);
   const [startHeaderTyping, setStartHeaderTyping] = useState<boolean>(false);

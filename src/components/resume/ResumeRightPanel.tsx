@@ -4,20 +4,20 @@ function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function renderEmphasizedText(text: string, emphasis: string[] = []): JSX.Element[] {
-  if (!emphasis || emphasis.length === 0) return [<span key={0}>{text}</span>];
+function renderEmphasizedText(text: string, emphasis: string[] = []): (React.ReactElement | string)[] {
+  if (!emphasis || emphasis.length === 0) return [text];
   const pattern = new RegExp(`(${emphasis.map(e => escapeRegExp(e)).join('|')})`, 'g');
   const parts = text.split(pattern);
   return parts.map((part, i) => (
     emphasis.includes(part) ? (
       <span key={i} className="font-semibold">{part}</span>
     ) : (
-      <span key={i}>{part}</span>
+      part
     )
   ));
 }
 
-function ResumeRightPanel(): JSX.Element {
+function ResumeRightPanel() {
     return (
         <main className="md:col-span-2 space-y-4 md:space-y-6">
           <h3 className="text-xl md:text-2xl font-semibold text-gray-900 md:text-left mb-4">Professional Experience</h3>

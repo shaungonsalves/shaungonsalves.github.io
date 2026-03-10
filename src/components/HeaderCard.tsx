@@ -9,7 +9,7 @@ interface HeaderCardProps {
   startTyping: boolean;
 }
 
-function HeaderCard({ startTyping }: HeaderCardProps): JSX.Element {
+function HeaderCard({ startTyping }: HeaderCardProps) {
   const nameRef = useRef<HTMLSpanElement>(null);
   const originalName = resumeData.name;
   const [isComplete, setIsComplete] = useState<boolean>(false);
@@ -33,10 +33,14 @@ function HeaderCard({ startTyping }: HeaderCardProps): JSX.Element {
       onUpdate: function() {
         const progress = this.progress();
         const visibleLength = Math.floor(progress * originalName.length);
-        nameRef.current.textContent = originalName.substring(0, visibleLength);
+        if (nameRef.current) {
+          nameRef.current.textContent = originalName.substring(0, visibleLength);
+        }
       },
       onComplete: () => {
-        nameRef.current.textContent = originalName;
+        if (nameRef.current) {
+          nameRef.current.textContent = originalName;
+        }
         setIsComplete(true);
       }
     });

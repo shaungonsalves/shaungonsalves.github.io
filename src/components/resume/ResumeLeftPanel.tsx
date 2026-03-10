@@ -1,6 +1,6 @@
 import { resumeData } from '../../assets/resumeData';
 
-function ResumeLeftPanel(): JSX.Element {
+function ResumeLeftPanel() {
   return (
     <aside className="md:col-span-1 space-y-4 md:space-y-6">
       {/* Contact */}
