@@ -1,4 +1,4 @@
-import { resumeData } from '../../assets/resumeData';
+import { Experience, resumeData } from '../../assets/resumeData';
 
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -21,7 +21,7 @@ function ResumeRightPanel() {
     return (
         <main className="md:col-span-2 space-y-4 md:space-y-6">
           <h3 className="text-xl md:text-2xl font-semibold text-gray-900 md:text-left mb-4">Professional Experience</h3>
-          {resumeData.experience.map((job, idx) => (
+          {resumeData.experience.map((job: Experience, idx: number) => (
             <section key={idx} className="border border-gray-200 p-3 md:p-4 rounded">
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                 <h4 className="text-lg md:text-xl text-gray-900 text-left font-medium">{job.company}</h4>
@@ -30,7 +30,7 @@ function ResumeRightPanel() {
               <p className="text-gray-700 text-left font-medium text-sm md:text-base">{job.title}</p>
               <p className="text-sm text-left text-gray-600 mb-2">Tech: {job.tech}</p>
               <ul className="list-disc list-outside pl-4 md:pl-5 space-y-1 text-gray-800 text-left text-sm md:text-base">
-                {job.bullets.map((bullet, i) => {
+                {job.bullets.map((bullet: string | { text: string; emphasis?: string[] }, i: number) => {
                   if (typeof bullet === 'string') {
                     return <li key={i}>{bullet}</li>;
                   }

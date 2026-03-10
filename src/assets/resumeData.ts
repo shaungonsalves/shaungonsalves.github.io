@@ -1,11 +1,56 @@
-export const resumeData = {
+export interface Contact {
+  email: string;
+  linkedin: string;
+}
+
+export interface Skills {
+  core: string[];
+  db: string[];
+  aws: string[];
+  tools: string[];
+}
+
+export interface Academic {
+  institution: string;
+  location: string;
+  degree: string;
+  details?: string;
+  date: string;
+}
+
+export interface Certification {
+  institution: string;
+  location: string;
+  certificate: string;
+  details?: string;
+  date: string;
+}
+
+export interface Experience {
+  company: string;
+  title: string;
+  dates: string;
+  tech: string;
+  bullets: (string | { text: string; emphasis?: string[] })[];
+}
+
+export interface ResumeData {
+  name: string;
+  headline: string;
+  contact: Contact;
+  skills: Skills;
+  academics: Academic[];
+  certification: Certification[];
+  experience: Experience[];
+}
+
+export const resumeData: ResumeData = {
   name: "Shaun Gonsalves",
   headline: "Seeking a Full-Time role as an experienced Software Developer. A hardcore team-player and proven professional with expertise in distributed systems, cutting edge cloud.",
   contact: {
     email: "shaun.gonsalves288@gmail.com",
     linkedin: "https://www.linkedin.com/in/shaungonsalves/",
   },
-  // Group skills by category
   skills: {
     core: ["Java", "JUnit", "Python", "Pytest", "Typescript"],
     db: ["SQL", "Postgres", "MongoDB", "DynamoDB"],

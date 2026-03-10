@@ -1,4 +1,4 @@
-import { resumeData } from '../../assets/resumeData';
+import { Academic, Certification, resumeData } from '../../assets/resumeData';
 
 function ResumeLeftPanel() {
   return (
@@ -44,7 +44,7 @@ function ResumeLeftPanel() {
         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 pb-1 border-b border-gray-200">
           Academics
         </h3>
-        {resumeData.academics.map((edu, idx) => (
+        {resumeData.academics.map((edu: Academic, idx: number) => (
           <div key={idx} className="mb-4 last:mb-0">
             <h4 className="font-semibold text-gray-900 text-sm md:text-base">{edu.institution}</h4>
             <p className="text-sm text-gray-600">{edu.location}</p>
@@ -60,7 +60,7 @@ function ResumeLeftPanel() {
         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 pb-1 border-b border-gray-200">
           Certificates
         </h3>
-        {resumeData.certification.map((cert, idx) => (
+        {resumeData.certification.map((cert: Certification, idx: number) => (
 
           <div key={idx} className="mb-4 last:mb-0">
             <h4 className="font-semibold text-gray-900 text-sm md:text-base">{cert.institution}</h4>
