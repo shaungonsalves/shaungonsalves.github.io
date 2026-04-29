@@ -35,52 +35,54 @@ function App() {
   useEffect(() => {
     const headerEl = headerRef.current;
     const resumeEl = resumeRef.current;
-    if (!headerEl || !resumeEl) return;
+    if (!headerEl || !resumeEl) return undefined;
 
-    if (prefersReducedMotion) {
-      gsap.set(headerEl, { opacity: 1, y: 0 });
-      gsap.set(resumeEl, { opacity: 1, y: 0 });
-      setStartHeaderTyping(true);
-      return;
-    }
+    const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        gsap.set(headerEl, { opacity: 1, y: 0 });
+        gsap.set(resumeEl, { opacity: 1, y: 0 });
+        setStartHeaderTyping(true);
+        return;
+      }
 
-    gsap.fromTo(
-      headerEl,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power2.out',
-        onComplete: () => setStartHeaderTyping(true),
-      },
-    );
-
-    gsap.fromTo(
-      resumeEl,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: resumeEl,
-          start: 'top 80%',
-          end: 'bottom 20%',
-          toggleActions: 'play none none none',
+      gsap.fromTo(
+        headerEl,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out',
+          onComplete: () => setStartHeaderTyping(true),
         },
-      },
-    );
+      );
+
+      gsap.fromTo(
+        resumeEl,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: resumeEl,
+            start: 'top 80%',
+            end: 'bottom 20%',
+            toggleActions: 'play none none none',
+          },
+        },
+      );
+    });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ctx.revert();
     };
   }, [prefersReducedMotion]);
 
   return (
     <>
       <div ref={headerRef}>
-        <HeaderCard startTyping={startHeaderTyping} prefersReducedMotion={prefersReducedMotion} />
+        <HeaderCard startTyping={startHeaderTyping} />
       </div>
       <div ref={resumeRef}>
         <ResumeCard />

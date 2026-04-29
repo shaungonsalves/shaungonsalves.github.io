@@ -1,5 +1,7 @@
 export const headerData = {
-  name: "Shaun Gonsalves",
-  headline:
-    "Open to senior software engineer roles with a focus on backend and infrastructure. Based in Toronto; open to relocation within Canada. Authorized to work in Canada; no employer sponsorship required.",
+  name: 'Shaun Gonsalves',
+  tagline:
+    'Open to full-time senior software engineer roles with a focus on backend and infrastructure.',
+  meta:
+    'Open to relocation within Canada. Authorized to work in Canada; no employer sponsorship required.',
 };

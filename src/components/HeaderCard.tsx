@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { Download, Linkedin, Mail } from 'lucide-react';
+import { Download, Linkedin, Mail, MapPin } from 'lucide-react';
 import { resumeData } from '../assets/resumeData';
 import { headerData } from '../assets/headerData';
 import resumePdf from '../assets/pdf/resume.pdf';
 
+const TYPING_DURATION_MS = 5000;
+
 interface HeaderCardProps {
   startTyping: boolean;
-  prefersReducedMotion: boolean;
 }
 
-function HeaderCard({ startTyping, prefersReducedMotion }: HeaderCardProps) {
+function HeaderCard({ startTyping }: HeaderCardProps) {
   const nameRef = useRef<HTMLSpanElement>(null);
+  const rafRef = useRef<number>(0);
   const originalName = resumeData.name;
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
@@ -29,81 +30,99 @@ function HeaderCard({ startTyping, prefersReducedMotion }: HeaderCardProps) {
   };
 
   useEffect(() => {
-    if (!startTyping) return;
+    if (!startTyping) return undefined;
 
-    if (prefersReducedMotion) {
-      if (nameRef.current) {
-        nameRef.current.textContent = originalName;
+    const len = originalName.length;
+    const msPerChar = len > 0 ? TYPING_DURATION_MS / len : TYPING_DURATION_MS;
+
+    const stopRaf = () => {
+      if (rafRef.current !== 0) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = 0;
       }
-      setIsComplete(true);
-      return;
-    }
+    };
 
-    gsap.to(
-      {},
-      {
-        duration: 2,
-        ease: 'none',
-        onUpdate: function onUpdate() {
-          const progress = this.progress();
-          const visibleLength = Math.floor(progress * originalName.length);
-          if (nameRef.current) {
-            nameRef.current.textContent = originalName.substring(0, visibleLength);
-          }
-        },
-        onComplete: () => {
-          if (nameRef.current) {
-            nameRef.current.textContent = originalName;
-          }
-          setIsComplete(true);
-        },
-      },
-    );
-  }, [startTyping, originalName, prefersReducedMotion]);
+    const start = performance.now();
+
+    const tick = (now: number): void => {
+      const elapsed = now - start;
+      const visibleLength = Math.min(len, Math.floor(elapsed / msPerChar));
+      const el = nameRef.current;
+      if (el) {
+        el.textContent = originalName.slice(0, visibleLength);
+      }
+
+      if (visibleLength < len) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        rafRef.current = 0;
+        if (nameRef.current) {
+          nameRef.current.textContent = originalName;
+        }
+        setIsComplete(true);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+
+    return () => {
+      stopRaf();
+    };
+  }, [startTyping, originalName]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-12 max-w-3xl text-center shadow-xl">
-        <div
-          className={`inline-block bg-black rounded-full px-6 py-3 font-mono text-xl md:text-2xl mb-4 transition-colors duration-300 ${
-            isComplete ? 'text-cyan-300' : 'text-green-400'
-          }`}
-        >
-          <span>&gt;&nbsp;</span>
-          <span ref={nameRef} />
-          <span className="cursor">_</span>
+      <div className="w-full max-w-3xl rounded-2xl border border-white/20 bg-white/90 p-8 shadow-xl ring-1 ring-black/5 backdrop-blur-md md:p-12">
+        <div className="mx-auto flex max-w-lg flex-col items-center space-y-5 text-center">
+          <div
+            className={`inline-flex items-center gap-0.5 rounded-full bg-black px-6 py-3 font-mono text-xl transition-colors duration-300 md:text-2xl ${
+              isComplete ? 'text-cyan-300' : 'text-green-400'
+            }`}
+          >
+            <span>&gt;&nbsp;</span>
+            <span ref={nameRef} />
+            <span className="cursor">_</span>
+          </div>
+
+          <div className="w-full space-y-3">
+            <p className="text-xl font-medium leading-snug text-gray-900 md:text-2xl">{headerData.tagline}</p>
+            <p className="inline-flex items-center justify-center gap-1.5 text-sm text-gray-700 md:text-base">
+              <MapPin className="h-4 w-4 shrink-0 text-gray-600" aria-hidden />
+              <span>{resumeData.location.city}</span>
+            </p>
+            <p className="text-sm leading-relaxed text-gray-600 md:text-base">{headerData.meta}</p>
+          </div>
         </div>
 
-        <p className="text-lg md:text-xl text-gray-800 mb-8">{headerData.headline}</p>
-        <div className="flex flex-row gap-4 justify-center">
+        <div className="mt-8 flex flex-row flex-wrap justify-center gap-5 sm:gap-6">
           <button
             type="button"
             aria-label="Download resume PDF"
             title="Download Resume"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
+            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
             onClick={handleDownload}
           >
-            <Download />
+            <Download className="h-8 w-8" strokeWidth={1.75} />
           </button>
           <button
             type="button"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
+            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
             onClick={openLinkedIn}
           >
-            <Linkedin />
+            <Linkedin className="h-8 w-8" strokeWidth={1.75} />
           </button>
           <button
             type="button"
             aria-label="Send email"
             title="Email"
-            className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
+            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
             onClick={() => {
               window.location.href = `mailto:${resumeData.contact.email}`;
             }}
           >
-            <Mail />
+            <Mail className="h-8 w-8" strokeWidth={1.75} />
           </button>
         </div>
       </div>

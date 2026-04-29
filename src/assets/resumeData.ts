@@ -52,7 +52,8 @@ export interface ResumeData {
 
 export const resumeData: ResumeData = {
   name: "Shaun Gonsalves",
-  headline: "Seeking a full-time role as an experienced Software Developer. A hardcore team-player and proven professional with expertise in distributed systems, cutting edge cloud.",
+  headline:
+    "Open to full-time senior software engineer roles with a focus on backend and infrastructure. Based in Toronto; open to relocation within Canada. Authorized to work in Canada; no employer sponsorship required.",
   contact: {
     email: "shaun.gonsalves288@gmail.com",
     linkedin: "https://www.linkedin.com/in/shaungonsalves/",

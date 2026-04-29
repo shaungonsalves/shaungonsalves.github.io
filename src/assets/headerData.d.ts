@@ -1,7 +1,7 @@
-// Declare the headerData export
 declare const headerData: {
   name: string;
-  headline: string;
+  tagline: string;
+  meta: string;
 };
 
 export { headerData };
