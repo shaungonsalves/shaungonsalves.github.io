@@ -3,6 +3,11 @@ export interface Contact {
   linkedin: string;
 }
 
+export interface LocationInfo {
+  city: string;
+  relocation: string;
+}
+
 export interface Skills {
   core: string[];
   db: string[];
@@ -38,6 +43,7 @@ export interface ResumeData {
   name: string;
   headline: string;
   contact: Contact;
+  location: LocationInfo;
   skills: Skills;
   academics: Academic[];
   certification: Certification[];
@@ -46,10 +52,14 @@ export interface ResumeData {
 
 export const resumeData: ResumeData = {
   name: "Shaun Gonsalves",
-  headline: "Seeking a Full-Time role as an experienced Software Developer. A hardcore team-player and proven professional with expertise in distributed systems, cutting edge cloud.",
+  headline: "Seeking a full-time role as an experienced Software Developer. A hardcore team-player and proven professional with expertise in distributed systems, cutting edge cloud.",
   contact: {
     email: "shaun.gonsalves288@gmail.com",
     linkedin: "https://www.linkedin.com/in/shaungonsalves/",
+  },
+  location: {
+    city: "Toronto ON",
+    relocation: "Open to relocation",
   },
   skills: {
     core: ["Java", "JUnit", "Python", "Pytest", "Typescript"],

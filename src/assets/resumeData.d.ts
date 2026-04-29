@@ -3,6 +3,11 @@ export interface Contact {
   linkedin: string;
 }
 
+export interface LocationInfo {
+  city: string;
+  relocation: string;
+}
+
 export interface Skills {
   core: string[];
   db: string[];
@@ -38,6 +43,7 @@ export interface ResumeData {
   name: string;
   headline: string;
   contact: Contact;
+  location: LocationInfo;
   skills: Skills;
   academics: Academic[];
   certification: Certification[];

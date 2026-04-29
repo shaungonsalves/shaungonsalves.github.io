@@ -3,6 +3,17 @@ import { Academic, Certification, resumeData } from '../../assets/resumeData';
 function ResumeLeftPanel() {
   return (
     <aside className="md:col-span-1 space-y-4 md:space-y-6">
+      <section className="bg-gray-50 p-4 md:p-5 rounded-lg shadow-sm border border-gray-100 text-center">
+        <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 pb-1 border-b border-gray-200">
+          Location
+        </h3>
+        <p className="text-gray-800 text-sm md:text-base">
+          {resumeData.location.city}
+          <span className="text-gray-600"> · </span>
+          <span className="text-gray-700">{resumeData.location.relocation}</span>
+        </p>
+      </section>
+
       {/* Contact */}
       <section className="bg-gray-50 p-4 md:p-5 rounded-lg shadow-sm border border-gray-100">
         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 pb-1 border-b border-gray-200">
