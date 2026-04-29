@@ -73,9 +73,9 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="w-full max-w-3xl rounded-2xl border border-white/20 bg-white/90 p-8 shadow-xl ring-1 ring-black/5 backdrop-blur-md md:p-12">
-        <div className="mx-auto flex max-w-lg flex-col items-center space-y-5 text-center">
+        <div className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center space-y-5 text-center">
           <div
-            className={`inline-flex items-center gap-0.5 rounded-full bg-black px-6 py-3 font-mono text-xl transition-colors duration-300 md:text-2xl ${
+            className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-black px-6 py-4 font-mono text-3xl font-semibold leading-none tracking-tight transition-colors duration-300 sm:px-8 sm:py-5 sm:text-4xl md:text-5xl ${
               isComplete ? 'text-cyan-300' : 'text-green-400'
             }`}
           >
