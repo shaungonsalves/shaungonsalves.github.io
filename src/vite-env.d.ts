@@ -1,3 +1,7 @@
+/// <reference types="vite/client" />
+
+declare module '*.css';
+
 // Global type declarations for asset imports
 declare module '*.pdf' {
   const content: string;
