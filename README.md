@@ -1,16 +1,36 @@
-# React + Vite
+# shaungonsalves.github.io
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site built with React, Vite, TypeScript, Tailwind CSS, and GSAP. Content is driven by typed data modules so you can update your resume without touching layout code.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 22+ (matches CI)
+- npm
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Command | Description |
+|--------|-------------|
+| `npm install` | Install dependencies |
+| `npm run dev` | Local dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | ESLint (`src/` and config; vendored assets ignored) |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run deploy` | Runs `predeploy` (build) then publishes `dist/` to the `gh-pages` branch via `gh-pages` |
 
-## Expanding the ESLint configuration
+## Editing content
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Resume body (experience, skills, education, etc.):** [`src/assets/resumeData.ts`](src/assets/resumeData.ts)
+- **Hero headline (header card):** [`src/assets/headerData.ts`](src/assets/headerData.ts)
+- **PDF download:** place `resume.pdf` at [`src/assets/pdf/resume.pdf`](src/assets/pdf/resume.pdf) (typed in [`src/assets/pdf/resume.pdf.d.ts`](src/assets/pdf/resume.pdf.d.ts))
+- **Page metadata (title, Open Graph):** [`index.html`](index.html)
+- **Static assets copied to site root:** [`public/`](public/) (e.g. [`public/favicon.svg`](public/favicon.svg))
+
+## Deployment (GitHub Pages)
+
+This repo uses the [`gh-pages`](https://github.com/tschaub/gh-pages) package to push `dist/` to the `gh-pages` branch. Ensure GitHub Pages is set to deploy from that branch (or your chosen source). User/org pages at `https://shaungonsalves.github.io/` typically use the `master` or `main` branch for source and publish built assets from `gh-pages`.
+
+## Legacy folders
+
+[`vendor/`](vendor/) and [`gulpfile.js`](gulpfile.js) are leftovers from an older static toolchain. The Vite app **does not** import them; the live site is produced only from `npm run build`. Do not delete without confirming nothing else in your workflow references those paths.
