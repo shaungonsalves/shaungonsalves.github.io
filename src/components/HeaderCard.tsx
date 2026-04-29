@@ -71,58 +71,64 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
   }, [startTyping, originalName]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-3xl rounded-2xl border border-white/20 bg-white/90 p-8 shadow-xl ring-1 ring-black/5 backdrop-blur-md md:p-12">
-        <div className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center space-y-5 text-center">
-          <div
-            className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-black px-6 py-4 font-mono text-3xl font-semibold leading-none tracking-tight transition-colors duration-300 sm:px-8 sm:py-5 sm:text-4xl md:text-5xl ${
-              isComplete ? 'text-cyan-300' : 'text-green-400'
-            }`}
-          >
-            <span>&gt;&nbsp;</span>
-            <span ref={nameRef} />
-            <span className="cursor">_</span>
+    <div className="flex min-h-screen items-center justify-center px-3 py-8 sm:px-4 sm:py-10 md:py-12">
+      <div className="w-full max-w-3xl rounded-xl border border-white/20 bg-white/90 p-4 shadow-xl ring-1 ring-black/5 backdrop-blur-md sm:rounded-2xl sm:p-6 md:p-10 lg:p-12">
+        <div className="mx-auto flex w-full min-w-0 max-w-2xl flex-col items-center space-y-4 text-center sm:space-y-5">
+          <div className="flex w-full min-w-0 justify-center">
+            <div className="max-w-full overflow-x-auto overflow-y-hidden overscroll-x-contain [-ms-overflow-style:none] [scrollbar-width:none] sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+              <div
+                className={`mx-auto inline-flex w-max items-center gap-0.5 whitespace-nowrap rounded-full bg-black px-3 py-2.5 font-mono text-2xl font-semibold leading-none tracking-tight transition-colors duration-300 sm:gap-1 sm:px-6 sm:py-4 sm:text-3xl md:px-8 md:py-5 md:text-4xl lg:text-5xl ${
+                  isComplete ? 'text-cyan-300' : 'text-green-400'
+                }`}
+              >
+                <span>&gt;&nbsp;</span>
+                <span ref={nameRef} />
+                <span className="cursor">_</span>
+              </div>
+            </div>
           </div>
 
-          <div className="w-full space-y-3">
-            <p className="text-xl font-medium leading-snug text-gray-900 md:text-2xl">{headerData.tagline}</p>
-            <p className="inline-flex items-center justify-center gap-1.5 text-sm text-gray-700 md:text-base">
-              <MapPin className="h-4 w-4 shrink-0 text-gray-600" aria-hidden />
+          <div className="w-full min-w-0 space-y-2.5 sm:space-y-3">
+            <p className="text-balance text-base font-medium leading-snug text-gray-900 sm:text-lg md:text-xl lg:text-2xl">
+              {headerData.tagline}
+            </p>
+            <p className="inline-flex items-center justify-center gap-1.5 text-xs text-gray-700 sm:text-sm md:text-base">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-gray-600 sm:h-4 sm:w-4" aria-hidden />
               <span>{resumeData.location.city}</span>
             </p>
-            <p className="text-sm leading-relaxed text-gray-600 md:text-base">{headerData.meta}</p>
+            <p className="text-balance text-xs leading-relaxed text-gray-600 sm:text-sm md:text-base">{headerData.meta}</p>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-row flex-wrap justify-center gap-5 sm:gap-6">
+        <div className="mt-6 flex flex-row flex-wrap justify-center gap-3 sm:mt-8 sm:gap-4 md:gap-6">
           <button
             type="button"
             aria-label="Download resume PDF"
             title="Download Resume"
-            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
             onClick={handleDownload}
           >
-            <Download className="h-8 w-8" strokeWidth={1.75} />
+            <Download className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
           </button>
           <button
             type="button"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
-            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
             onClick={openLinkedIn}
           >
-            <Linkedin className="h-8 w-8" strokeWidth={1.75} />
+            <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
           </button>
           <button
             type="button"
             aria-label="Send email"
             title="Email"
-            className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
             onClick={() => {
               window.location.href = `mailto:${resumeData.contact.email}`;
             }}
           >
-            <Mail className="h-8 w-8" strokeWidth={1.75} />
+            <Mail className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
           </button>
         </div>
       </div>

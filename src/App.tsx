@@ -1,5 +1,5 @@
 import './App.css';
-import { useRef, useEffect, useState, useSyncExternalStore } from 'react';
+import { useRef, useLayoutEffect, useState, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeaderCard from './components/HeaderCard';
@@ -32,7 +32,7 @@ function App() {
   const resumeRef = useRef<HTMLDivElement>(null);
   const [startHeaderTyping, setStartHeaderTyping] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const headerEl = headerRef.current;
     const resumeEl = resumeRef.current;
     if (!headerEl || !resumeEl) return undefined;
@@ -40,7 +40,7 @@ function App() {
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
         gsap.set(headerEl, { opacity: 1, y: 0 });
-        gsap.set(resumeEl, { opacity: 1, y: 0 });
+        gsap.set(resumeEl, { opacity: 1, y: 0, visibility: 'visible' });
         setStartHeaderTyping(true);
         return;
       }
@@ -57,21 +57,29 @@ function App() {
         },
       );
 
-      gsap.fromTo(
-        resumeEl,
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: resumeEl,
-            start: 'top 80%',
-            end: 'bottom 20%',
-            toggleActions: 'play none none none',
-          },
+      /**
+       * ScrollTrigger + fromTo defaults to immediateRender: false, so “from” opacity
+       * is not applied until the tween runs — the resume paints fully opaque first,
+       * so the fade is invisible. Hide synchronously, then reveal on scroll.
+       */
+      gsap.set(resumeEl, { autoAlpha: 0, y: 56 });
+
+      gsap.to(resumeEl, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1.4,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: resumeEl,
+          start: 'top 88%',
+          once: true,
+          invalidateOnRefresh: true,
         },
-      );
+      });
+    });
+
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
     });
 
     return () => {
