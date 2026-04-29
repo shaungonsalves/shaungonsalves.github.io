@@ -78,11 +78,13 @@ function App() {
       });
     });
 
-    requestAnimationFrame(() => {
+    const refreshOnLoad = (): void => {
       ScrollTrigger.refresh();
-    });
+    };
+    window.addEventListener('load', refreshOnLoad);
 
     return () => {
+      window.removeEventListener('load', refreshOnLoad);
       ctx.revert();
     };
   }, [prefersReducedMotion]);

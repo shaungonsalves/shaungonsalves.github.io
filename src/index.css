@@ -43,13 +43,18 @@ body {
 /**
  * Full-viewport background layer (not background-attachment on body).
  * Avoids iOS/Safari quirks with cover + scroll, and flex-body background repaint.
+ * Master JPEG: src/assets/background/seattle_sunset.jpg (for npm run optimize:hero only).
+ * Served backgrounds: optimized /public/background/ hero.webp + hero.jpg (LCP).
  */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: url('assets/background/seattle_sunset.jpg');
+  background-image: image-set(
+    url('/background/hero.webp') type('image/webp'),
+    url('/background/hero.jpg') type('image/jpeg')
+  );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
