@@ -8,10 +8,24 @@ function ResumeLeftPanel() {
         <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-3 pb-1 border-b border-gray-200">
           Contact
         </h3>
-        <p><a href={`mailto:${resumeData.contact.email}`} className="text-blue-600 hover:underline text-sm md:text-base break-all">{resumeData.contact.email}</a></p>
-        <p><a href={resumeData.contact.linkedin} className="text-blue-600 hover:underline text-sm md:text-base break-all">
-          {resumeData.contact.linkedin.replace(/^https?:\/\/www\./, '').replace(/\/+$/, '')}
-        </a></p>  
+        <p>
+          <a
+            href={`mailto:${resumeData.contact.email}`}
+            className="text-blue-600 hover:underline text-sm md:text-base break-all"
+          >
+            {resumeData.contact.email}
+          </a>
+        </p>
+        <p>
+          <a
+            href={resumeData.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline text-sm md:text-base break-all"
+          >
+            {resumeData.contact.linkedin.replace(/^https?:\/\/www\./, '').replace(/\/+$/, '')}
+          </a>
+        </p>  
       </section>
 
       {/* Technical Skills */}

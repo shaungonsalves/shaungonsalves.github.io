@@ -7,14 +7,14 @@ import resumePdf from '../assets/pdf/resume.pdf';
 
 interface HeaderCardProps {
   startTyping: boolean;
+  prefersReducedMotion: boolean;
 }
 
-function HeaderCard({ startTyping }: HeaderCardProps) {
+function HeaderCard({ startTyping, prefersReducedMotion }: HeaderCardProps) {
   const nameRef = useRef<HTMLSpanElement>(null);
   const originalName = resumeData.name;
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
-  // create and click an anchor element so the browser downloads the file
   const handleDownload = (): void => {
     const a = document.createElement('a');
     a.href = resumePdf;
@@ -24,27 +24,42 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
     document.body.removeChild(a);
   };
 
+  const openLinkedIn = (): void => {
+    window.open(resumeData.contact.linkedin, '_blank', 'noopener,noreferrer');
+  };
+
   useEffect(() => {
     if (!startTyping) return;
 
-    gsap.to({}, {
-      duration: 2,
-      ease: "none",
-      onUpdate: function() {
-        const progress = this.progress();
-        const visibleLength = Math.floor(progress * originalName.length);
-        if (nameRef.current) {
-          nameRef.current.textContent = originalName.substring(0, visibleLength);
-        }
-      },
-      onComplete: () => {
-        if (nameRef.current) {
-          nameRef.current.textContent = originalName;
-        }
-        setIsComplete(true);
+    if (prefersReducedMotion) {
+      if (nameRef.current) {
+        nameRef.current.textContent = originalName;
       }
-    });
-  }, [startTyping, originalName]);
+      setIsComplete(true);
+      return;
+    }
+
+    gsap.to(
+      {},
+      {
+        duration: 2,
+        ease: 'none',
+        onUpdate: function onUpdate() {
+          const progress = this.progress();
+          const visibleLength = Math.floor(progress * originalName.length);
+          if (nameRef.current) {
+            nameRef.current.textContent = originalName.substring(0, visibleLength);
+          }
+        },
+        onComplete: () => {
+          if (nameRef.current) {
+            nameRef.current.textContent = originalName;
+          }
+          setIsComplete(true);
+        },
+      },
+    );
+  }, [startTyping, originalName, prefersReducedMotion]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -55,7 +70,7 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
           }`}
         >
           <span>&gt;&nbsp;</span>
-          <span ref={nameRef}></span>
+          <span ref={nameRef} />
           <span className="cursor">_</span>
         </div>
 
@@ -63,29 +78,32 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
         <div className="flex flex-row gap-4 justify-center">
           <button
             type="button"
+            aria-label="Download resume PDF"
             title="Download Resume"
             className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
             onClick={handleDownload}
           >
-            <Download/>
+            <Download />
           </button>
           <button
             type="button"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
             className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
-            onClick={() => window.open(resumeData.contact.linkedin, '_blank')}
+            onClick={openLinkedIn}
           >
-            <Linkedin/>
+            <Linkedin />
           </button>
           <button
             type="button"
             aria-label="Send email"
             title="Email"
             className="bg-gray-900 text-white w-14 h-14 rounded-full hover:bg-gray-700 transition flex items-center justify-center"
-            onClick={() => window.location.href = `mailto:${resumeData.contact.email}`}
+            onClick={() => {
+              window.location.href = `mailto:${resumeData.contact.email}`;
+            }}
           >
-            <Mail/>
+            <Mail />
           </button>
         </div>
       </div>

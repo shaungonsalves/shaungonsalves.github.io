@@ -1,5 +1,5 @@
 import './App.css';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import HeaderCard from './components/HeaderCard';
@@ -7,15 +7,45 @@ import ResumeCard from './components/ResumeCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
+function subscribeReducedMotion(onChange: () => void) {
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', onChange);
+  return () => mq.removeEventListener('change', onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
 function App() {
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
+
   const headerRef = useRef<HTMLDivElement>(null);
   const resumeRef = useRef<HTMLDivElement>(null);
-  const [startHeaderTyping, setStartHeaderTyping] = useState<boolean>(false);
+  const [startHeaderTyping, setStartHeaderTyping] = useState(false);
 
   useEffect(() => {
-    // Header fade‑in on load
+    const headerEl = headerRef.current;
+    const resumeEl = resumeRef.current;
+    if (!headerEl || !resumeEl) return;
+
+    if (prefersReducedMotion) {
+      gsap.set(headerEl, { opacity: 1, y: 0 });
+      gsap.set(resumeEl, { opacity: 1, y: 0 });
+      setStartHeaderTyping(true);
+      return;
+    }
+
     gsap.fromTo(
-      headerRef.current,
+      headerEl,
       { opacity: 0, y: 20 },
       {
         opacity: 1,
@@ -23,35 +53,34 @@ function App() {
         duration: 1,
         ease: 'power2.out',
         onComplete: () => setStartHeaderTyping(true),
-      }
+      },
     );
 
-    // Resume scroll‑triggered animation
     gsap.fromTo(
-      resumeRef.current,
+      resumeEl,
       { opacity: 0, y: 20 },
       {
         opacity: 1,
         y: 0,
         duration: 1,
         scrollTrigger: {
-          trigger: resumeRef.current,
+          trigger: resumeEl,
           start: 'top 80%',
           end: 'bottom 20%',
           toggleActions: 'play none none none',
         },
-      }
+      },
     );
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <>
       <div ref={headerRef}>
-        <HeaderCard startTyping={startHeaderTyping} />
+        <HeaderCard startTyping={startHeaderTyping} prefersReducedMotion={prefersReducedMotion} />
       </div>
       <div ref={resumeRef}>
         <ResumeCard />
