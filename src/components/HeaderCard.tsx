@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Download, Linkedin, Mail, MapPin } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { resumeData } from '../assets/resumeData';
 import { headerData } from '../assets/headerData';
 import resumePdf from '../assets/pdf/resume.pdf';
@@ -27,6 +27,10 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
 
   const openLinkedIn = (): void => {
     window.open(resumeData.contact.linkedin, '_blank', 'noopener,noreferrer');
+  };
+
+  const openGitHub = (): void => {
+    window.open(resumeData.contact.github, '_blank', 'noopener,noreferrer');
   };
 
   useEffect(() => {
@@ -118,6 +122,15 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
             onClick={openLinkedIn}
           >
             <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
+          </button>
+          <button
+            type="button"
+            aria-label="Open GitHub profile"
+            title="GitHub"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
+            onClick={openGitHub}
+          >
+            <Github className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
           </button>
           <button
             type="button"

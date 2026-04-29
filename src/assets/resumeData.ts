@@ -1,6 +1,7 @@
 export interface Contact {
   email: string;
   linkedin: string;
+  github: string;
 }
 
 export interface LocationInfo {
@@ -57,6 +58,7 @@ export const resumeData: ResumeData = {
   contact: {
     email: "shaun.gonsalves288@gmail.com",
     linkedin: "https://www.linkedin.com/in/shaungonsalves/",
+    github: "https://github.com/shaungonsalves",
   },
   location: {
     city: "Toronto ON",

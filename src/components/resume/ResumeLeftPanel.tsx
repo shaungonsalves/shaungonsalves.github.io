@@ -36,7 +36,17 @@ function ResumeLeftPanel() {
           >
             {resumeData.contact.linkedin.replace(/^https?:\/\/www\./, '').replace(/\/+$/, '')}
           </a>
-        </p>  
+        </p>
+        <p>
+          <a
+            href={resumeData.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:underline text-sm md:text-base break-all"
+          >
+            {resumeData.contact.github.replace(/^https?:\/\//, '').replace(/\/+$/, '')}
+          </a>
+        </p>
       </section>
 
       {/* Technical Skills */}
