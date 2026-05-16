@@ -99,7 +99,7 @@ export const resumeData: ResumeData = {
     {
       company: "Intuit Inc.",
       title: "Software Engineer 2",
-      dates: "Oct 2024 - Present",
+      dates: "Oct 2024 - Feb 2026",
       tech: "Java 21, Kotlin, Springboot, Typescript, React",
       bullets: [
         {
