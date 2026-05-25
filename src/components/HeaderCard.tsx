@@ -16,23 +16,6 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
   const originalName = resumeData.name;
   const [isComplete, setIsComplete] = useState<boolean>(false);
 
-  const handleDownload = (): void => {
-    const a = document.createElement('a');
-    a.href = resumePdf;
-    a.setAttribute('download', '');
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
-  const openLinkedIn = (): void => {
-    window.open(resumeData.contact.linkedin, '_blank', 'noopener,noreferrer');
-  };
-
-  const openGitHub = (): void => {
-    window.open(resumeData.contact.github, '_blank', 'noopener,noreferrer');
-  };
-
   useEffect(() => {
     if (!startTyping) return undefined;
 
@@ -105,44 +88,43 @@ function HeaderCard({ startTyping }: HeaderCardProps) {
         </div>
 
         <div className="mt-6 flex flex-row flex-wrap justify-center gap-3 sm:mt-8 sm:gap-4 md:gap-6">
-          <button
-            type="button"
+          <a
+            href={resumePdf}
+            download="Shaun_Gonsalves_Resume.pdf"
             aria-label="Download resume PDF"
             title="Download Resume"
             className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
-            onClick={handleDownload}
           >
             <Download className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
-          </button>
-          <button
-            type="button"
+          </a>
+          <a
+            href={resumeData.contact.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Open LinkedIn profile"
             title="LinkedIn"
             className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
-            onClick={openLinkedIn}
           >
             <Linkedin className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
-          </button>
-          <button
-            type="button"
+          </a>
+          <a
+            href={resumeData.contact.github}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Open GitHub profile"
             title="GitHub"
             className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
-            onClick={openGitHub}
           >
             <Github className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
-          </button>
-          <button
-            type="button"
+          </a>
+          <a
+            href={`mailto:${resumeData.contact.email}`}
             aria-label="Send email"
             title="Email"
             className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-900 text-white transition hover:bg-gray-700 sm:h-20 sm:w-20"
-            onClick={() => {
-              window.location.href = `mailto:${resumeData.contact.email}`;
-            }}
           >
             <Mail className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
-          </button>
+          </a>
         </div>
       </div>
     </div>
